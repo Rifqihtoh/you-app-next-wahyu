@@ -7,27 +7,20 @@ import { useSignIn } from "@/services/auth/useAuth";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
-// import { useRegister } from "@/services/auth/useAuth";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
+const firebaseConfig = {
+  apiKey: "AIzaSyD_K0BiOG4OmDNuc78Q1NjHsOp1oBbutg0",
+  authDomain: "test1-50b58.firebaseapp.com",
+  projectId: "test1-50b58",
+  storageBucket: "test1-50b58.appspot.com",
+  messagingSenderId: "662016335786",
+  appId: "1:662016335786:web:3ef50906dc5ce50a9915d3",
+  measurementId: "G-P4ZRLBJDZ7"
+};
 
 export default function LoginPage() {
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyD_K0BiOG4OmDNuc78Q1NjHsOp1oBbutg0",
-    authDomain: "test1-50b58.firebaseapp.com",
-    projectId: "test1-50b58",
-    storageBucket: "test1-50b58.appspot.com",
-    messagingSenderId: "662016335786",
-    appId: "1:662016335786:web:3ef50906dc5ce50a9915d3",
-    measurementId: "G-P4ZRLBJDZ7"
-  }
-  
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-
   const router = useRouter();
 
   const { control, handleSubmit } = useForm({
@@ -70,6 +63,12 @@ export default function LoginPage() {
 
     handleCheckIsLogin();
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    console.log("🚀 ~ useEffect ~ analytics:", analytics);
   }, []);
 
   return (
